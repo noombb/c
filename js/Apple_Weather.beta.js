@@ -17,8 +17,11 @@ $.VAL = {
 $.Apple = { "Weather": { "Mode": "WAQI Public", "Location": "Station", "Verify": { "Mode": "Token", "Content": null } } };
 // BoxJs Function Supported"
 if ($.getdata("iRingo") !== null) {
+	$.log(`🎉 ${$.name}, BoxJs`);
 	// load user prefs from BoxJs
-	$.Apple = JSON.parse($.getdata("iRingo"))?.Apple
+	const iRingo = $.getdata("iRingo")
+	$.log(JSON.stringify(iRingo));
+	$.Apple = JSON.parse(iRingo)?.Apple
 	//$.log(JSON.stringify($.Apple.Weather))
 	if ($.Apple?.Weather?.Verify?.Mode == "Key") {
 		$.Apple.Weather.Verify.Content = Array.from($.Apple.Weather.Verify.Content.split("\n"))
@@ -27,6 +30,7 @@ if ($.getdata("iRingo") !== null) {
 }
 // Argument Function Supported
 else if (typeof $argument != "undefined") {
+	$.log(`🎉 ${$.name}, $Argument`);
 	let arg = Object.fromEntries($argument.split("&").map((item) => item.split("=")));
 	$.log(JSON.stringify(arg));
 	$.Apple.Weather.Mode = arg.Mode;
